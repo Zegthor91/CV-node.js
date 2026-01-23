@@ -104,28 +104,18 @@
         // Charger les données du CV depuis l'API
         async function chargerCV() {
             try {
-                console.log('Chargement du CV...');
                 const response = await fetch('/api/cv/');
                 const result = await response.json();
-                console.log('Réponse API:', result);
 
                 if (result.status === 'success') {
-                    const cv = result.data;
-                    console.log('Données CV:', cv);
-                    afficherCV(cv);
-                } else {
-                    console.error('Erreur:', result.message);
-                    document.getElementById('cv-nom').textContent = 'Erreur de chargement';
+                    afficherCV(result.data);
                 }
             } catch (error) {
                 console.error('Erreur lors du chargement du CV:', error);
-                document.getElementById('cv-nom').textContent = 'Erreur de connexion à l\'API';
             }
         }
 
         function afficherCV(cv) {
-            console.log('Affichage du CV...');
-
             // En-tête
             document.getElementById('cv-nom').textContent = cv.nom;
             document.getElementById('cv-titre').textContent = cv.titre;
@@ -170,39 +160,29 @@
             // Compétences
             const competencesDiv = document.getElementById('cv-competences');
             competencesDiv.innerHTML = '';
-            console.log('Compétences:', cv.competences);
-            if (cv.competences && cv.competences.length > 0) {
-                cv.competences.forEach(comp => {
-                    const compDiv = document.createElement('div');
-                    compDiv.className = 'competence-item';
-                    compDiv.innerHTML = `
-                        <strong>${comp.nom}</strong>
-                        <span>${comp.niveau}</span>
-                    `;
-                    competencesDiv.appendChild(compDiv);
-                });
-            } else {
-                competencesDiv.innerHTML = '<p style="color: #9ca3af;">Aucune compétence disponible</p>';
-            }
+            cv.competences.forEach(comp => {
+                const compDiv = document.createElement('div');
+                compDiv.className = 'competence-item';
+                compDiv.innerHTML = `
+                    <strong>${comp.nom}</strong>
+                    <span>${comp.niveau}</span>
+                `;
+                competencesDiv.appendChild(compDiv);
+            });
 
             // Langues
             const languesDiv = document.getElementById('cv-langues');
             languesDiv.innerHTML = '<ul class="langues-list"></ul>';
             const languesUl = languesDiv.querySelector('.langues-list');
-            console.log('Langues:', cv.langues);
-            if (cv.langues && cv.langues.length > 0) {
-                cv.langues.forEach(langue => {
-                    const langueDiv = document.createElement('li');
-                    langueDiv.className = 'langue-item';
-                    langueDiv.innerHTML = `
-                        <strong>${langue.nom}</strong>
-                        <span>${langue.niveau}</span>
-                    `;
-                    languesUl.appendChild(langueDiv);
-                });
-            } else {
-                languesDiv.innerHTML = '<p style="color: #9ca3af;">Aucune langue disponible</p>';
-            }
+            cv.langues.forEach(langue => {
+                const langueDiv = document.createElement('li');
+                langueDiv.className = 'langue-item';
+                langueDiv.innerHTML = `
+                    <strong>${langue.nom}</strong>
+                    <span>${langue.niveau}</span>
+                `;
+                languesUl.appendChild(langueDiv);
+            });
 
             // Loisirs
             const loisirsUl = document.getElementById('cv-loisirs');
@@ -216,21 +196,14 @@
             // Réseaux
             const reseauxDiv = document.getElementById('cv-reseaux');
             reseauxDiv.innerHTML = '';
-            console.log('Réseaux:', cv.reseaux);
-            if (cv.reseaux && Object.keys(cv.reseaux).length > 0) {
-                Object.entries(cv.reseaux).forEach(([nom, url]) => {
-                    const link = document.createElement('a');
-                    link.href = url.startsWith('http') ? url : 'https://' + url;
-                    link.target = '_blank';
-                    link.className = 'reseau-link';
-                    link.innerHTML = `🔗 ${nom.charAt(0).toUpperCase() + nom.slice(1)}`;
-                    reseauxDiv.appendChild(link);
-                });
-            } else {
-                reseauxDiv.innerHTML = '<p style="color: #9ca3af;">Aucun réseau disponible</p>';
-            }
-
-            console.log('✅ CV affiché avec succès');
+            Object.entries(cv.reseaux).forEach(([nom, url]) => {
+                const link = document.createElement('a');
+                link.href = url.startsWith('http') ? url : 'https://' + url;
+                link.target = '_blank';
+                link.className = 'reseau-link';
+                link.innerHTML = `🔗 ${nom.charAt(0).toUpperCase() + nom.slice(1)}`;
+                reseauxDiv.appendChild(link);
+            });
         }
 
         // Gestion du formulaire de contact
