@@ -1,0 +1,90 @@
+{
+  "nom": "Idir ZEGTITOUCHE",
+  "titre": "Développeur web et d'applications",
+  "localisation": "Vitry sur Seine, France",
+  "email": "idirzegtitouche@efrei.net",
+  "telephone": "+33 6 XX XX XX XX",
+  "profil": "Étudiant en école d'ingénieur passionné par le développement web et d'applications. Compétences en développement front-end et back-end, avec une forte appétence pour les nouvelles technologies.",
+  "experiences": [
+    {
+      "id": 1,
+      "poste": "Bac Générale - Lycée Adolphe Chérioux",
+      "periode": "2021 - 2024",
+      "description": "Formation générale avec spécialité sciences"
+    },
+    {
+      "id": 2,
+      "poste": "Bachelor : Développement Web et Applications - EFREI Paris",
+      "periode": "2024 - 2027",
+      "description": "Formation en développement web, API, bases de données et technologies modernes"
+    }
+  ],
+  "formation": [
+    {
+      "id": 1,
+      "etablissement": "École d'ingénieur — EFREI",
+      "localisation": "Villejuif",
+      "periode": "En cours",
+      "diplome": "Bachelor Développement Web et Applications",
+      "description": "Option: développement web Projet: API + interface"
+    },
+    {
+      "id": 2,
+      "etablissement": "Lycée — Adolphe Chérioux",
+      "localisation": "Vitry sur Seine",
+      "diplome": "Baccalauréat Général",
+      "description": "Spécialités scientifiques"
+    }
+  ],
+  "competences": [
+    {
+      "id": 1,
+      "nom": "Node.js",
+      "niveau": "Intermédiaire"
+    },
+    {
+      "id": 2,
+      "nom": "Express",
+      "niveau": "Intermédiaire"
+    },
+    {
+      "id": 3,
+      "nom": "JavaScript",
+      "niveau": "Avancé"
+    },
+    {
+      "id": 4,
+      "nom": "HTML/CSS",
+      "niveau": "Avancé"
+    },
+    {
+      "id": 5,
+      "nom": "Git",
+      "niveau": "Intermédiaire"
+    },
+    {
+      "id": 6,
+      "nom": "API REST",
+      "niveau": "Intermédiaire"
+    }
+  ],
+  "loisirs": [
+    "Football",
+    "Musculation",
+    "Cosplay"
+  ],
+  "langues": [
+    {
+      "nom": "Français",
+      "niveau": "Langue maternelle"
+    },
+    {
+      "nom": "Anglais",
+      "niveau": "Intermédiaire"
+    }
+  ],
+  "reseaux": {
+    "github": "https://github.com/Zegthor91",
+    "linkedin": "www.linkedin.com/in/idir-zegtitouche"
+  }
+}

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Idir ZEGTITOUCHE</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête -->
+        <header class="cv-header" id="cv-header">
+            <h1 id="cv-nom">Chargement...</h1>
+            <p class="subtitle" id="cv-titre"></p>
+            <div class="contact-info" id="cv-contact">
+                <p id="cv-localisation"></p>
+                <p id="cv-email"></p>
+            </div>
+        </header>
+
+        <!-- Section CV -->
+        <div class="cv-content">
+            <p class="section-label">CV</p>
+
+            <!-- Profil -->
+            <section class="cv-section">
+                <h2>Profil</h2>
+                <p id="cv-profil"></p>
+            </section>
+
+            <!-- Expériences -->
+            <section class="cv-section">
+                <h2>Expériences</h2>
+                <div id="cv-experiences"></div>
+            </section>
+
+            <!-- Formation -->
+            <section class="cv-section">
+                <h2>Formation</h2>
+                <div id="cv-formation"></div>
+            </section>
+
+            <!-- Compétences -->
+            <section class="cv-section">
+                <h2>Compétences</h2>
+                <div id="cv-competences" class="competences-grid"></div>
+            </section>
+
+            <!-- Langues -->
+            <section class="cv-section">
+                <h2>Langues</h2>
+                <div id="cv-langues"></div>
+            </section>
+
+            <!-- Loisirs -->
+            <section class="cv-section">
+                <h2>Loisirs</h2>
+                <ul class="loisirs-list" id="cv-loisirs"></ul>
+            </section>
+
+            <!-- Réseaux sociaux -->
+            <section class="cv-section">
+                <h2>Réseaux</h2>
+                <div id="cv-reseaux" class="reseaux-links"></div>
+            </section>
+
+            <!-- Contact -->
+            <section class="cv-section contact-section">
+                <h2>Contact</h2>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" name="nom" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sujet">Sujet</label>
+                        <input type="text" id="sujet" name="sujet" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Envoyer</button>
+                </form>
+                <p class="form-note">Les messages sont enregistrés et consultables via l'API</p>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="cv-footer">
+            <p>© 2025 Idir Zegtitouche — Projet Node.js + Express</p>
+        </footer>
+    </div>
+
+    <script>
+        // Charger les données du CV depuis l'API
+        async function chargerCV() {
+            try {
+                console.log('Chargement du CV...');
+                const response = await fetch('/api/cv/');
+                const result = await response.json();
+                console.log('Réponse API:', result);
+
+                if (result.status === 'success') {
+                    const cv = result.data;
+                    console.log('Données CV:', cv);
+                    afficherCV(cv);
+                } else {
+                    console.error('Erreur:', result.message);
+                    document.getElementById('cv-nom').textContent = 'Erreur de chargement';
+                }
+            } catch (error) {
+                console.error('Erreur lors du chargement du CV:', error);
+                document.getElementById('cv-nom').textContent = 'Erreur de connexion à l\'API';
+            }
+        }
+
+        function afficherCV(cv) {
+            console.log('Affichage du CV...');
+
+            // En-tête
+            document.getElementById('cv-nom').textContent = cv.nom;
+            document.getElementById('cv-titre').textContent = cv.titre;
+            document.getElementById('cv-localisation').textContent = cv.localisation;
+            document.getElementById('cv-email').textContent = cv.email;
+
+            // Profil
+            document.getElementById('cv-profil').textContent = cv.profil;
+
+            // Expériences
+            const experiencesDiv = document.getElementById('cv-experiences');
+            experiencesDiv.innerHTML = '';
+            cv.experiences.forEach(exp => {
+                const expDiv = document.createElement('div');
+                expDiv.className = 'experience-item';
+                expDiv.innerHTML = `
+                    <h3>• ${exp.poste}</h3>
+                    <p class="period">${exp.periode}</p>
+                    ${exp.description ? `<p class="description">${exp.description}</p>` : ''}
+                `;
+                experiencesDiv.appendChild(expDiv);
+            });
+
+            // Formation
+            const formationDiv = document.getElementById('cv-formation');
+            formationDiv.innerHTML = '';
+            cv.formation.forEach(form => {
+                const formDiv = document.createElement('div');
+                formDiv.className = 'formation-item';
+                formDiv.innerHTML = `
+                    <h3>• ${form.etablissement}</h3>
+                    ${form.periode ? `<p class="period">${form.periode}</p>` : ''}
+                    <p class="description">
+                        ${form.localisation ? form.localisation + '<br>' : ''}
+                        ${form.diplome ? form.diplome + '<br>' : ''}
+                        ${form.description || ''}
+                    </p>
+                `;
+                formationDiv.appendChild(formDiv);
+            });
+
+            // Compétences
+            const competencesDiv = document.getElementById('cv-competences');
+            competencesDiv.innerHTML = '';
+            console.log('Compétences:', cv.competences);
+            if (cv.competences && cv.competences.length > 0) {
+                cv.competences.forEach(comp => {
+                    const compDiv = document.createElement('div');
+                    compDiv.className = 'competence-item';
+                    compDiv.innerHTML = `
+                        <strong>${comp.nom}</strong>
+                        <span>${comp.niveau}</span>
+                    `;
+                    competencesDiv.appendChild(compDiv);
+                });
+            } else {
+                competencesDiv.innerHTML = '<p style="color: #9ca3af;">Aucune compétence disponible</p>';
+            }
+
+            // Langues
+            const languesDiv = document.getElementById('cv-langues');
+            languesDiv.innerHTML = '<ul class="langues-list"></ul>';
+            const languesUl = languesDiv.querySelector('.langues-list');
+            console.log('Langues:', cv.langues);
+            if (cv.langues && cv.langues.length > 0) {
+                cv.langues.forEach(langue => {
+                    const langueDiv = document.createElement('li');
+                    langueDiv.className = 'langue-item';
+                    langueDiv.innerHTML = `
+                        <strong>${langue.nom}</strong>
+                        <span>${langue.niveau}</span>
+                    `;
+                    languesUl.appendChild(langueDiv);
+                });
+            } else {
+                languesDiv.innerHTML = '<p style="color: #9ca3af;">Aucune langue disponible</p>';
+            }
+
+            // Loisirs
+            const loisirsUl = document.getElementById('cv-loisirs');
+            loisirsUl.innerHTML = '';
+            cv.loisirs.forEach(loisir => {
+                const li = document.createElement('li');
+                li.textContent = `• ${loisir}`;
+                loisirsUl.appendChild(li);
+            });
+
+            // Réseaux
+            const reseauxDiv = document.getElementById('cv-reseaux');
+            reseauxDiv.innerHTML = '';
+            console.log('Réseaux:', cv.reseaux);
+            if (cv.reseaux && Object.keys(cv.reseaux).length > 0) {
+                Object.entries(cv.reseaux).forEach(([nom, url]) => {
+                    const link = document.createElement('a');
+                    link.href = url.startsWith('http') ? url : 'https://' + url;
+                    link.target = '_blank';
+                    link.className = 'reseau-link';
+                    link.innerHTML = `🔗 ${nom.charAt(0).toUpperCase() + nom.slice(1)}`;
+                    reseauxDiv.appendChild(link);
+                });
+            } else {
+                reseauxDiv.innerHTML = '<p style="color: #9ca3af;">Aucun réseau disponible</p>';
+            }
+
+            console.log('✅ CV affiché avec succès');
+        }
+
+        // Gestion du formulaire de contact
+        document.querySelector('.contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = {
+                nom: document.getElementById('nom').value,
+                email: document.getElementById('email').value,
+                sujet: document.getElementById('sujet').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                const response = await fetch('/api/contact/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    alert('✅ Message envoyé avec succès !');
+                    this.reset();
+                } else {
+                    alert('❌ Erreur: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('❌ Erreur lors de l\'envoi du message');
+            }
+        });
+
+        // Charger le CV au chargement de la page
+        document.addEventListener('DOMContentLoaded', chargerCV);
+    </script>
+</body>
+</html>

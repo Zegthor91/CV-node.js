@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nom": "Idir",
+    "prenom": "Zegtitouche",
+    "email": "idir@efrei.net"
+  },
+  {
+    "id": 2,
+    "nom": "Sabri",
+    "prenom": "Kasri",
+    "email": "sabri@efrei.net"
+  },
+  {
+    "id": 3,
+    "nom": "Tazio",
+    "prenom": "Giampiccolo",
+    "email": "tazio@efrei.net"
+  }
+]

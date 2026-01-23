@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nom": "Ordinateur portable",
+    "prix": 899.99,
+    "stock": 15
+  },
+  {
+    "id": 2,
+    "nom": "Souris sans fil",
+    "prix": 29.99,
+    "stock": 50
+  },
+  {
+    "id": 3,
+    "nom": "Clavier mécanique",
+    "prix": 79.99,
+    "stock": 30
+  }
+]
