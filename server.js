@@ -1,6 +1,12 @@
+// Chargement des variables d'environnement
+require('dotenv').config();
+
 // Importation des modules nécessaires
 const path = require('path');
 const express = require('express');
+const connectDB = require('./config/db');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const routes = require('./routes');
 const apiRoutes = require('./routes/api');
 const cvRoutes = require('./routes/cv');
@@ -71,15 +77,17 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Démarrage du serveur
-app.listen(PORT, () => {
-    console.log('\n' + '='.repeat(50));
-    console.log('Serveur Node.js démarré avec succès !');
-    console.log('='.repeat(50));
-    console.log(`URL: http://localhost:${PORT}`);
-    console.log(`Environnement: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`Répertoire: ${__dirname}`);
-    console.log('='.repeat(50) + '\n');
+// Connexion à MongoDB puis démarrage du serveur
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log('\n' + '='.repeat(50));
+        console.log('Serveur Node.js démarré avec succès !');
+        console.log('='.repeat(50));
+        console.log(`URL: http://localhost:${PORT}`);
+        console.log(`Environnement: ${process.env.NODE_ENV || 'development'}`);
+        console.log(`Répertoire: ${__dirname}`);
+        console.log('='.repeat(50) + '\n');
+    });
 });
 
 // Gestion de l'arrêt gracieux
