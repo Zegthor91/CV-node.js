@@ -1,0 +1,107 @@
+<%- include('../partials/header') %>
+
+<header class="cv-header">
+    <h1><%= cv ? cv.nom : 'CV' %></h1>
+    <% if (cv) { %>
+        <p class="subtitle"><%= cv.titre %></p>
+        <div class="contact-info">
+            <p><%= cv.localisation %></p>
+            <p><%= cv.email %></p>
+            <% if (cv.telephone) { %><p><%= cv.telephone %></p><% } %>
+        </div>
+    <% } %>
+</header>
+
+<div class="cv-content">
+    <% if (cv) { %>
+
+        <% if (cv.profil) { %>
+        <section class="cv-section">
+            <h2>Profil</h2>
+            <p><%= cv.profil %></p>
+        </section>
+        <% } %>
+
+        <% if (cv.experiences && cv.experiences.length > 0) { %>
+        <section class="cv-section">
+            <h2>Exp&eacute;riences</h2>
+            <% cv.experiences.forEach(exp => { %>
+                <div class="experience-item">
+                    <h3>&bull; <%= exp.poste %></h3>
+                    <span class="period"><%= exp.periode %></span>
+                    <% if (exp.description) { %>
+                        <p class="description"><%= exp.description %></p>
+                    <% } %>
+                </div>
+            <% }); %>
+        </section>
+        <% } %>
+
+        <% if (cv.formation && cv.formation.length > 0) { %>
+        <section class="cv-section">
+            <h2>Formation</h2>
+            <% cv.formation.forEach(f => { %>
+                <div class="experience-item">
+                    <h3>&bull; <%= f.etablissement %></h3>
+                    <% if (f.localisation) { %><p><%= f.localisation %></p><% } %>
+                    <span class="period"><%= f.periode %></span>
+                    <% if (f.diplome) { %><p><strong><%= f.diplome %></strong></p><% } %>
+                    <% if (f.description) { %><p class="description"><%= f.description %></p><% } %>
+                </div>
+            <% }); %>
+        </section>
+        <% } %>
+
+        <% if (cv.competences && cv.competences.length > 0) { %>
+        <section class="cv-section">
+            <h2>Comp&eacute;tences</h2>
+            <div class="skills-grid">
+                <% cv.competences.forEach(c => { %>
+                    <div class="skill-item">
+                        <span class="skill-name"><%= c.nom %></span>
+                        <span class="skill-level"><%= c.niveau %></span>
+                    </div>
+                <% }); %>
+            </div>
+        </section>
+        <% } %>
+
+        <% if (cv.langues && cv.langues.length > 0) { %>
+        <section class="cv-section">
+            <h2>Langues</h2>
+            <% cv.langues.forEach(l => { %>
+                <div class="skill-item">
+                    <span class="skill-name"><%= l.nom %></span>
+                    <span class="skill-level"><%= l.niveau %></span>
+                </div>
+            <% }); %>
+        </section>
+        <% } %>
+
+        <% if (cv.loisirs && cv.loisirs.length > 0) { %>
+        <section class="cv-section">
+            <h2>Loisirs</h2>
+            <p><%= cv.loisirs.join(', ') %></p>
+        </section>
+        <% } %>
+
+        <% if (cv.reseaux) { %>
+        <section class="cv-section">
+            <h2>R&eacute;seaux</h2>
+            <div class="social-links">
+                <% if (cv.reseaux.github) { %>
+                    <a href="<%= cv.reseaux.github %>" target="_blank">GitHub</a>
+                <% } %>
+                <% if (cv.reseaux.linkedin) { %>
+                    <a href="<%= cv.reseaux.linkedin %>" target="_blank">LinkedIn</a>
+                <% } %>
+            </div>
+        </section>
+        <% } %>
+
+    <% } else { %>
+        <p>Aucune donn&eacute;e CV trouv&eacute;e.</p>
+    <% } %>
+</div>
+
+<%- include('../partials/footer') %>

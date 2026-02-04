@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+
+<div class="cv-content">
+    <h2>Tableau de bord</h2>
+
+    <div class="admin-cards">
+        <a href="/admin/experiences" class="admin-card">
+            <h3>Exp&eacute;riences</h3>
+            <p><%= cv ? cv.experiences.length : 0 %> &eacute;l&eacute;ment(s)</p>
+        </a>
+        <a href="/admin/formations" class="admin-card">
+            <h3>Formations</h3>
+            <p><%= cv ? cv.formation.length : 0 %> &eacute;l&eacute;ment(s)</p>
+        </a>
+        <a href="/admin/loisirs" class="admin-card">
+            <h3>Loisirs</h3>
+            <p><%= cv ? cv.loisirs.length : 0 %> &eacute;l&eacute;ment(s)</p>
+        </a>
+        <a href="/admin/messages" class="admin-card">
+            <h3>Messages</h3>
+            <p><%= messageCount %> total, <%= unreadCount %> non lu(s)</p>
+        </a>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

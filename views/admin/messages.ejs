@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+
+<div class="cv-content">
+    <h2>Messages</h2>
+
+    <% if (messages.length > 0) { %>
+        <% messages.forEach(msg => { %>
+            <div class="admin-item message-item <%= msg.lu ? '' : 'unread' %>">
+                <div>
+                    <h3><%= msg.sujet %></h3>
+                    <p><strong><%= msg.nom %> <%= msg.prenom || '' %></strong> - <%= msg.email %></p>
+                    <p class="description"><%= msg.message %></p>
+                    <small><%= msg.dateLisible || msg.createdAt %></small>
+                    <% if (!msg.lu) { %>
+                        <span class="badge-unread">Non lu</span>
+                    <% } %>
+                </div>
+                <div class="admin-actions">
+                    <% if (!msg.lu) { %>
+                        <form method="POST" action="/admin/messages/<%= msg._id %>/read" style="display:inline;">
+                            <button type="submit" class="btn-read">Marquer lu</button>
+                        </form>
+                    <% } %>
+                    <form method="POST" action="/admin/messages/<%= msg._id %>/delete" style="display:inline;"
+                          onsubmit="return confirm('Supprimer ce message ?')">
+                        <button type="submit" class="btn-delete">Supprimer</button>
+                    </form>
+                </div>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>Aucun message.</p>
+    <% } %>
+
+    <a href="/admin" class="btn-back">&larr; Retour au tableau de bord</a>
+</div>
+
+<%- include('../partials/footer') %>

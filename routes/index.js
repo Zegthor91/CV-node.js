@@ -1,25 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
+const pageController = require('../controller/pageController');
 
-// Route principale - Afficher le CV directement
-router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../cv/views/index.html'));
-});
-
-// Route CV
-router.get('/cv', (req, res) => {
-    res.sendFile(path.join(__dirname, '../cv/views/index.html'));
-});
-
-// Route About
-router.get('/about', (req, res) => {
-    res.json({
-        projet: 'Projet Node.js - Serveur Express',
-        auteur: 'Idir ZEGTITOUCHE',
-        description: 'Serveur Node.js avec Express et système de routing',
-        technologies: ['Node.js', 'Express', 'JavaScript']
-    });
-});
+// Pages publiques
+router.get('/', pageController.home);
+router.get('/experience', pageController.experience);
+router.get('/formation', pageController.formation);
+router.get('/loisirs', pageController.loisirs);
+router.get('/contact', pageController.showContact);
+router.post('/contact', pageController.submitContact);
 
 module.exports = router;

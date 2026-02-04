@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+
+<div class="cv-content">
+    <h2>Connexion</h2>
+
+    <form class="contact-form" method="POST" action="/login">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn-submit">Se connecter</button>
+    </form>
+    <p style="margin-top: 15px; color: #9ca3af;">
+        Pas encore de compte ? <a href="/register" style="color: #6366f1;">S'inscrire</a>
+    </p>
+</div>
+
+<%- include('../partials/footer') %>

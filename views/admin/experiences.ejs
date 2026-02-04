@@ -1,0 +1,30 @@
+<%- include('../partials/header') %>
+
+<div class="cv-content">
+    <h2>G&eacute;rer les Exp&eacute;riences</h2>
+    <a href="/admin/experiences/new" class="btn-submit btn-add">+ Ajouter</a>
+
+    <% if (experiences.length > 0) { %>
+        <% experiences.forEach(exp => { %>
+            <div class="admin-item">
+                <div>
+                    <h3><%= exp.poste %></h3>
+                    <span class="period"><%= exp.periode %></span>
+                    <% if (exp.description) { %>
+                        <p class="description"><%= exp.description %></p>
+                    <% } %>
+                </div>
+                <form method="POST" action="/admin/experiences/<%= exp._id %>/delete"
+                      onsubmit="return confirm('Supprimer cette exp\u00e9rience ?')">
+                    <button type="submit" class="btn-delete">Supprimer</button>
+                </form>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>Aucune exp&eacute;rience enregistr&eacute;e.</p>
+    <% } %>
+
+    <a href="/admin" class="btn-back">&larr; Retour au tableau de bord</a>
+</div>
+
+<%- include('../partials/footer') %>

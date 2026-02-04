@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof title !== 'undefined' ? title : 'CV - Idir ZEGTITOUCHE' %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-brand">
+            <a href="/">Idir ZEGTITOUCHE</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/experience">Exp&eacute;riences</a></li>
+            <li><a href="/formation">Formation</a></li>
+            <li><a href="/loisirs">Loisirs</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <% if (isAuthenticated) { %>
+                <li><a href="/admin">Admin</a></li>
+                <li><a href="/logout">D&eacute;connexion</a></li>
+            <% } else { %>
+                <li><a href="/login">Connexion</a></li>
+            <% } %>
+        </ul>
+    </nav>
+    <%- include('flash') %>
+    <div class="container">

@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+
+<div class="cv-content">
+    <h2>G&eacute;rer les Loisirs</h2>
+    <a href="/admin/loisirs/new" class="btn-submit btn-add">+ Ajouter</a>
+
+    <% if (loisirs.length > 0) { %>
+        <% loisirs.forEach((loisir, index) => { %>
+            <div class="admin-item">
+                <div>
+                    <h3><%= loisir %></h3>
+                </div>
+                <form method="POST" action="/admin/loisirs/<%= index %>/delete"
+                      onsubmit="return confirm('Supprimer ce loisir ?')">
+                    <button type="submit" class="btn-delete">Supprimer</button>
+                </form>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>Aucun loisir enregistr&eacute;.</p>
+    <% } %>
+
+    <a href="/admin" class="btn-back">&larr; Retour au tableau de bord</a>
+</div>
+
+<%- include('../partials/footer') %>

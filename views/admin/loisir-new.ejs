@@ -1,0 +1,17 @@
+<%- include('../partials/header') %>
+
+<div class="cv-content">
+    <h2>Ajouter un Loisir</h2>
+
+    <form class="contact-form" method="POST" action="/admin/loisirs">
+        <div class="form-group">
+            <label for="nom">Nom du loisir *</label>
+            <input type="text" id="nom" name="nom" required>
+        </div>
+        <button type="submit" class="btn-submit">Ajouter</button>
+    </form>
+
+    <a href="/admin/loisirs" class="btn-back">&larr; Retour aux loisirs</a>
+</div>
+
+<%- include('../partials/footer') %>

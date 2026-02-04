@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+
+<div class="cv-content">
+    <h2>Formation</h2>
+
+    <% if (formations.length > 0) { %>
+        <% formations.forEach(f => { %>
+            <div class="experience-item">
+                <h3>&bull; <%= f.etablissement %></h3>
+                <% if (f.localisation) { %><p><%= f.localisation %></p><% } %>
+                <span class="period"><%= f.periode %></span>
+                <% if (f.diplome) { %><p><strong><%= f.diplome %></strong></p><% } %>
+                <% if (f.description) { %><p class="description"><%= f.description %></p><% } %>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>Aucune formation enregistr&eacute;e.</p>
+    <% } %>
+</div>
+
+<%- include('../partials/footer') %>
