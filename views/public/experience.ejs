@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+
+<div class="cv-content">
+    <h2>Exp&eacute;riences</h2>
+
+    <% if (experiences && experiences.length > 0) { %>
+        <% experiences.forEach(exp => { %>
+            <div class="experience-item">
+                <h3>&bull; <%= exp.titre %></h3>
+                <p><%= exp.company %></p>
+                <span class="period"><%= exp.startDate %><% if (exp.endDate) { %> - <%= exp.endDate %><% } %></span>
+                <% if (exp.description) { %>
+                    <p class="description"><%= exp.description %></p>
+                <% } %>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>Aucune exp&eacute;rience enregistr&eacute;e.</p>
+    <% } %>
+</div>
+
+<%- include('../partials/footer') %>

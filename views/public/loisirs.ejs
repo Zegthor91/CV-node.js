@@ -1,0 +1,17 @@
+<%- include('../partials/header') %>
+
+<div class="cv-content">
+    <h2>Loisirs</h2>
+
+    <% if (hobbies && hobbies.length > 0) { %>
+        <ul class="loisirs-list">
+            <% hobbies.forEach(h => { %>
+                <li><%= h.name %><% if (h.details) { %> - <%= h.details %><% } %></li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>Aucun loisir enregistr&eacute;.</p>
+    <% } %>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,79 @@
+<%- include('../partials/header') %>
+
+<header class="cv-header">
+    <% if (profile.photo) { %>
+        <img src="<%= profile.photo %>" alt="<%= profile.fullName %>" style="width: 120px; height: 120px; border-radius: 50%; margin-bottom: 15px;">
+    <% } %>
+    <h1><%= profile.fullName %></h1>
+    <p class="subtitle"><%= profile.headline %></p>
+    <div class="contact-info">
+        <% if (profile.location) { %><p><%= profile.location %></p><% } %>
+        <% if (profile.email) { %><p><%= profile.email %></p><% } %>
+        <% if (profile.phone) { %><p><%= profile.phone %></p><% } %>
+    </div>
+</header>
+
+<div class="cv-content">
+    <% if (profile.summary) { %>
+    <section class="cv-section">
+        <h2>Profil</h2>
+        <p><%= profile.summary %></p>
+    </section>
+    <% } %>
+
+    <% if (experiences && experiences.length > 0) { %>
+    <section class="cv-section">
+        <h2>Exp&eacute;riences</h2>
+        <% experiences.forEach(exp => { %>
+            <div class="experience-item">
+                <h3>&bull; <%= exp.titre %></h3>
+                <p><%= exp.company %></p>
+                <span class="period"><%= exp.startDate %><% if (exp.endDate) { %> - <%= exp.endDate %><% } %></span>
+                <% if (exp.description) { %>
+                    <p class="description"><%= exp.description %></p>
+                <% } %>
+            </div>
+        <% }); %>
+    </section>
+    <% } %>
+
+    <% if (formations && formations.length > 0) { %>
+    <section class="cv-section">
+        <h2>Formation</h2>
+        <% formations.forEach(f => { %>
+            <div class="experience-item">
+                <h3>&bull; <%= f.titre %></h3>
+                <p><%= f.company %></p>
+                <span class="period"><%= f.startDate %><% if (f.endDate) { %> - <%= f.endDate %><% } %></span>
+                <% if (f.description) { %>
+                    <p class="description"><%= f.description %></p>
+                <% } %>
+            </div>
+        <% }); %>
+    </section>
+    <% } %>
+
+    <% if (hobbies && hobbies.length > 0) { %>
+    <section class="cv-section">
+        <h2>Loisirs</h2>
+        <ul class="loisirs-list">
+            <% hobbies.forEach(h => { %>
+                <li><%= h.name %><% if (h.details) { %> - <%= h.details %><% } %></li>
+            <% }); %>
+        </ul>
+    </section>
+    <% } %>
+
+    <% if (profile.linkedin || profile.github || profile.website) { %>
+    <section class="cv-section">
+        <h2>Liens</h2>
+        <div class="social-links">
+            <% if (profile.linkedin) { %><a href="<%= profile.linkedin %>" target="_blank">LinkedIn</a><% } %>
+            <% if (profile.github) { %><a href="<%= profile.github %>" target="_blank">GitHub</a><% } %>
+            <% if (profile.website) { %><a href="<%= profile.website %>" target="_blank">Site web</a><% } %>
+        </div>
+    </section>
+    <% } %>
+</div>
+
+<%- include('../partials/footer') %>

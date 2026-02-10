@@ -6,7 +6,7 @@ const hobbySchema = new mongoose.Schema(
         details: {type: String, default: ''},
         order: {type: Number, default: 0}
     },
-    { timeStramps: true}
+    { timestamps: true }
 );
 
 module.exports = mongoose.model('Hobby', hobbySchema);

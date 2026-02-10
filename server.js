@@ -14,6 +14,7 @@ const routes = require('./routes');
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
 const apiRoutes = require('./routes/api');
+const publicRoutes = require('./routes/public');
 const cvRoutes = require('./routes/cv');
 const contactRoutes = require('./routes/contact');
 
@@ -81,6 +82,9 @@ app.use('/', routes);
 
 // Routes API
 app.use('/api', apiRoutes);
+
+// Routes API publiques (experiences, formations, hobbies)
+app.use('/api', publicRoutes);
 
 // Routes CV API
 app.use('/api/cv', cvRoutes);
